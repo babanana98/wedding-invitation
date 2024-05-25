@@ -53,6 +53,10 @@ h3 {
   color: #999;
 }
 
+p {
+  font-size: 0.8em;
+}
+
 .rsvpButton {
   display: inline-block;
   background: #008CBA;

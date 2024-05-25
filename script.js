@@ -1,9 +1,9 @@
-document.getElementById("rsvpButton").addEventListener("click", function () {
-  alert("Thank you for your RSVP!");
-});
-
 window.onload = function () {
   countdown();
+  const guestName = getQueryParam("guest");
+  if (guestName) {
+    document.getElementById("guestName").innerHTML = guestName;
+  }
 };
 
 function countdown() {
@@ -31,4 +31,9 @@ function countdown() {
         "The Wedding Has Started!";
     }
   }, 1000);
+}
+
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
 }
