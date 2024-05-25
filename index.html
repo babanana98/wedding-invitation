@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wedding Invitation</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+  </head>
+  <body>
+    <div class="background"></div>
+    <div class="container">
+      <header>
+        <h1>Wedding Invitation</h1>
+        <p>You're invited to the wedding of</p>
+        <h2>Jane & John</h2>
+        <p>on</p>
+        <h3>June 25, 2024</h3>
+        <div id="countdown">
+          <div><span id="days"></span>Days</div>
+          <div><span id="hours"></span>Hours</div>
+          <div><span id="minutes"></span>Minutes</div>
+          <div><span id="seconds"></span>Seconds</div>
+        </div>
+      </header>
+      <section class="details">
+        <p>
+          Join us for a celebration of love, friendship, laughter, and family.
+        </p>
+        <p><strong>Venue:</strong> Rose Garden, City Park</p>
+        <p><strong>Time:</strong> 5:00 PM</p>
+      </section>
+      <iframe id="map" src="http://maps.google.com/maps?q=25.3076008,51.4803216&z=16&output=embed"></iframe>
+      <footer>
+        <p>Please RSVP by June 10, 2024</p>
+        <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank" class="rsvpButton">RSVP</a>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
