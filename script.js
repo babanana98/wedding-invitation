@@ -1,10 +1,23 @@
+"use strict";
+
+const GUEST_NAME_QUERY_PARAM = "guest";
+
 window.onload = function () {
   countdown("June 30, 2024 17:00:00");
-  const guestName = getQueryParam("guest");
+  const guestName = getQueryParam(GUEST_NAME_QUERY_PARAM);
   if (guestName) {
     document.getElementById("guestName").innerHTML = guestName;
+    document.getElementById("guestNameSubmit").setAttribute('value', guestName);
   }
 };
+
+document.getElementById("submitForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  submitGoogleForm(document.getElementById("submitForm"));
+
+  // Todo: display label success and setting on cookie
+});
 
 function countdown(target) {
   var weddingDate = new Date(target).getTime();
@@ -36,4 +49,18 @@ function countdown(target) {
 function getQueryParam(param) {
   const urlParams = new URLSearchParams(window.location.search);
   return urlParams.get(param);
+}
+
+function submitGoogleForm(form) {
+  fetch(form.action, {
+    method: form.method,
+    headers: {
+      "Origin": "https://docs.google.com",
+    },
+    mode: "no-cors",
+    body: new FormData(form)
+  })
+  .catch(error => {
+    console.error("Error submitting form:", error);
+  });
 }

@@ -34,7 +34,22 @@
           <div><span id="minutes"></span>PHÚT</div>
           <div><span id="seconds"></span>GIÂY</div>
         </div>
-        <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank" class="rsvpButton">Vui lòng phúc đáp</a>
+        <!-- <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank" class="rsvpButton">Vui lòng phúc đáp</a> -->
+        <form id="submitForm"
+          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSf3dlqaAYSeGYLEoPtqhnxKrTJNe5DlSsIJ1QxmYIh0e0IZ1Q/formResponse"
+          method="POST">
+          <input type="hidden" name="entry.903587558" value="Undefine" id="guestNameSubmit">
+          <label>
+            <input type="radio" name="entry.650573155" value="Không, tôi rất tiếc không thể tham dự.">
+            Không, tôi rất tiếc không thể tham dự.
+          </label>
+          <label>
+            <input type="radio" name="entry.650573155" value="Có, tôi sẽ tham dự.">
+            Có, tôi sẽ tham dự.
+          </label><br>
+          
+          <button type="submit" id="rsvpButton">RSVP</button>
+        </form>
       </footer>
     </div>
     <script src="script.js"></script>
