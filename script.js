@@ -1,13 +1,13 @@
 window.onload = function () {
-  countdown();
+  countdown("June 30, 2024 17:00:00");
   const guestName = getQueryParam("guest");
   if (guestName) {
     document.getElementById("guestName").innerHTML = guestName;
   }
 };
 
-function countdown() {
-  var weddingDate = new Date("June 25, 2024 17:00:00").getTime();
+function countdown(target) {
+  var weddingDate = new Date(target).getTime();
 
   var x = setInterval(function () {
     var now = new Date().getTime();

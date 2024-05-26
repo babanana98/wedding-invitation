@@ -1,3 +1,14 @@
+:root {
+  --font-h1-pc: 31.25px;
+  --font-h2-pc: 25px;
+  --font-h3-pc: 20px;
+  --font-body-pc: 16px;
+  --font-h1-sp: 25.39px;
+  --font-h2-sp: 20.31px;
+  --font-h3-sp: 16.25px;
+  --font-body-sp: 13px;
+}
+
 /* Mobile first styles */
 body {
   font-family: Arial, sans-serif;
@@ -39,22 +50,26 @@ footer {
 }
 
 h1 {
-  font-size: 1.2em;
+  font-size: var(--font-h1-sp);
   color: #333;
+  margin: 14px;
 }
 
 h2 {
-  font-size: 1em;
+  font-size: var(--font-h2-sp);
   color: #666;
+  margin: 12px;
 }
 
 h3 {
-  font-size: 0.8em;
+  font-size: var(--font-h3-sp);
   color: #999;
+  margin: 10px;
 }
 
 p {
-  font-size: 0.8em;
+  font-size: var(--font-body-sp);
+  margin: 10px;
 }
 
 .rsvpButton {
@@ -75,7 +90,6 @@ p {
 #map {
   width: 100%;
   height: 200px;
-  margin-bottom: 20px;
   border: 0;
   border-radius: 5px;
 }
@@ -83,23 +97,23 @@ p {
 #countdown {
   display: flex;
   justify-content: center;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 #countdown div {
   margin: 0 10px;
   text-align: center;
+  font-size: var(--font-body-sp);
 }
 
 #countdown span {
   display: block;
-  font-size: 2em;
   color: #333;
+  font-size: var(--font-h3-sp);
 }
 
 .host-name {
   font-family: 'Great Vibes', cursive; /* Áp dụng font chữ đặc biệt */
-  font-size: 1.5em;
   color: #ff69b4;
 }
 
@@ -114,43 +128,27 @@ p {
     padding: 15px;
     max-width: 600px;
   }
-
-  h1 {
-    font-size: 1.5em;
-  }
-
-  h2 {
-    font-size: 1.2em;
-  }
-
-  h3 {
-    font-size: 1em;
-  }
-
-  .host-name {
-    font-size: 2em;
-  }
 }
 
 /* PC styles */
 @media (min-width: 769px) {
   h1 {
-    font-size: 2em;
+    font-size: var(--font-h1-pc);
   }
 
   h2 {
-    font-size: 1.5em;
+    font-size: var(--font-h2-pc);
   }
 
   h3 {
-    font-size: 1.2em;
+    font-size: var(--font-h3-pc);
   }
 
   .container {
     padding: 20px;
   }
 
-  .host-name {
-    font-size: 2.5em;
+  #countdown span {
+    font-size: var(--font-h3-pc);
   }
 }
