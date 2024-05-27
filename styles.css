@@ -119,6 +119,7 @@ p {
 
 #guestName {
   font-style: italic;
+  font-weight: bold;
   color: #333;
 }
 
