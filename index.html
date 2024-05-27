@@ -27,29 +27,20 @@
         <iframe id="map" src="http://maps.google.com/maps?q=25.3076008,51.4803216&z=16&output=embed"></iframe>
       </section>
       <footer>
-        <h3>THỜI GIAN CÒN LẠI</h3>
-        <div id="countdown">
+        <!-- <div id="countdown">
           <div><span id="days"></span>NGÀY</div>
           <div><span id="hours"></span>GIỜ</div>
           <div><span id="minutes"></span>PHÚT</div>
           <div><span id="seconds"></span>GIÂY</div>
+        </div> -->
+        <p>Hôn lễ sẽ diễn ra sau <strong>3 ngày</strong> nữa. 
+          Chúng tôi rất vui mừng được đón tiếp bạn tham gia bữa tiệc thân mật cùng chúng tôi. 
+          Xin vui lòng xác nhận sự hiện diện của bạn!</p>
+        <p id="fetchingStatus">Đang xử lý...</p>
+        <div id="submitButton">
+          <button onclick="handelSubmit(false)">Tôi rất tiếc không thể tham dự</button>
+          <button onclick="handelSubmit(true)">Tôi sẽ tham dự</button>
         </div>
-        <!-- <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" target="_blank" class="rsvpButton">Vui lòng phúc đáp</a> -->
-        <form id="submitForm"
-          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSf3dlqaAYSeGYLEoPtqhnxKrTJNe5DlSsIJ1QxmYIh0e0IZ1Q/formResponse"
-          method="POST">
-          <input type="hidden" name="entry.903587558" value="Undefine" id="guestNameSubmit">
-          <label>
-            <input type="radio" name="entry.650573155" value="Không, tôi rất tiếc không thể tham dự.">
-            Không, tôi rất tiếc không thể tham dự.
-          </label>
-          <label>
-            <input type="radio" name="entry.650573155" value="Có, tôi sẽ tham dự.">
-            Có, tôi sẽ tham dự.
-          </label><br>
-          
-          <button type="submit" id="rsvpButton">RSVP</button>
-        </form>
       </footer>
     </div>
     <script src="script.js"></script>

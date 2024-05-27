@@ -123,6 +123,10 @@ p {
   color: #333;
 }
 
+#fetchingStatus {
+  display: none;
+}
+
 /* Tablet styles */
 @media (min-width: 481px) {
   .container {
