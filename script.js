@@ -1,14 +1,14 @@
 "use strict";
 
 const GUEST_NAME_QUERY_PARAM = "guest";
+const GUEST_NAME_DEFAULT = "guest";
+
+const statusElement = document.getElementById("fetchingStatus");
+const submitElement = document.getElementById("submitButtons");
 
 window.onload = function () {
   // countdown("June 30, 2024 17:00:00");
-  var guestName = getQueryParam(GUEST_NAME_QUERY_PARAM);
-  if (guestName) {
-    document.getElementById("guestName").innerHTML = guestName;
-    document.getElementById("guestNameSubmit").setAttribute('value', guestName);
-  }
+  document.getElementById("guestName").innerHTML = getRequiredQueryParamOrElse(GUEST_NAME_QUERY_PARAM, GUEST_NAME_DEFAULT);
 };
 
 // function countdown(target) {
@@ -38,25 +38,14 @@ window.onload = function () {
 //   }, 1000);
 // }
 
-function getQueryParam(param) {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(param);
-}
-
 function handelSubmit(agree) {
-  // Showing processing status
-  var statusElement = document.getElementById("fetchingStatus");
-  statusElement.style.display = "block";
+  // Start processing
+  statusElement.className = "processing-message";
+  submitElement.className = "hidden-button";
 
-  // const submitData = {
-  //   "entry.903587558": guestName,
-  //   "entry.650573155": agree ? "Có, tôi sẽ tham dự." : "Không, tôi rất tiếc không thể tham dự.",
-  // };
-
-  const submitData = {
-    "entry.903587558": "Test+user",
-    "entry.650573155": "C%C3%B3%2C+t%C3%B4i+s%E1%BA%BD+tham+d%E1%BB%B1.",
-  };
+  const formData = new FormData();
+  formData.append("entry.903587558", getRequiredQueryParamOrElse(GUEST_NAME_QUERY_PARAM, GUEST_NAME_DEFAULT));
+  formData.append("entry.650573155", agree ? "Có, tôi sẽ tham dự." : "Không, tôi rất tiếc không thể tham dự.");
 
   fetch("https://docs.google.com/forms/u/0/d/e/1FAIpQLSf3dlqaAYSeGYLEoPtqhnxKrTJNe5DlSsIJ1QxmYIh0e0IZ1Q/formResponse", {
     method: "POST",
@@ -64,14 +53,25 @@ function handelSubmit(agree) {
       "Origin": "https://docs.google.com"
     },
     mode: "no-cors",
-    body: JSON.stringify(submitData)
+    body: formData
   })
   .then(response => {
-    statusElement.textContent = "Cảm ơn bạn đã đồng ý tham gia với chúng tôi!";
-    document.getElementById("fetchingStatus").style.display = "none";
+    // Complete processing
+    statusElement.textContent = agree ? "Cảm ơn bạn đã xác nhận sẽ tham dự!" : "Thật tiếc bạn không thể tham dự. Hy vọng sẽ gặp bạn trong dịp khác!";
+    statusElement.className = agree ? "success-message" : "warning-message";
   })
   .catch(error => {
     console.error("Error submitting form:", error);
-    statusElement.style.display = "none";
+    // Error processing
+    statusElement.className = "hidden-message";
+    submitElement.className = "display-button";
   });
+}
+
+function getRequiredQueryParamOrElse(param, defaultVal) {
+  const urlValue = new URLSearchParams(window.location.search).get(param);
+  if (urlValue) {
+    return urlValue;
+  }
+  else defaultVal;
 }

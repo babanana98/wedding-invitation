@@ -70,6 +70,7 @@ h3 {
 p {
   font-size: var(--font-body-sp);
   margin: 10px;
+  line-height: 20px;
 }
 
 #rsvpButton {
@@ -123,9 +124,33 @@ p {
   color: #333;
 }
 
-#fetchingStatus {
+.hidden-message {
   display: none;
 }
+
+.processing-message {
+  display: block;
+  color: #666;
+}
+
+.success-message {
+  display: block;
+  color: #00b300;
+}
+
+.warning-message {
+  display: block;
+  color: #cc7a00;
+}
+
+.hidden-button {
+  display: none;
+}
+
+.display-button {
+  display: block;
+}
+
 
 /* Tablet styles */
 @media (min-width: 481px) {
