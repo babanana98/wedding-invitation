@@ -8,7 +8,13 @@ const submitElement = document.getElementById("submitButtons");
 
 window.onload = function () {
   // countdown("June 30, 2024 17:00:00");
+  // setting guest name
   document.getElementById("guestName").innerHTML = getRequiredQueryParamOrElse(GUEST_NAME_QUERY_PARAM, GUEST_NAME_DEFAULT);
+  // setting message
+  const agree = localStorage.getItem("result");
+  if (agree) {
+    settingMessage(agree);
+  }
 };
 
 // function countdown(target) {
@@ -39,6 +45,11 @@ window.onload = function () {
 // }
 
 function handelSubmit(agree) {
+  // confirm action
+  if (!confirm(agree ? "Bạn có chắc chắn muốn tham dự?" : "Bạn có chắc chắn không thể tham dự?")) {
+    return;
+  }
+
   // Start processing
   statusElement.className = "processing-message";
   submitElement.className = "hidden-button";
@@ -57,8 +68,9 @@ function handelSubmit(agree) {
   })
   .then(response => {
     // Complete processing
-    statusElement.innerHTML = agree ? "Cảm ơn bạn đã xác nhận sẽ tham dự!" : "Thật tiếc bạn không thể tham dự.<br/>Hy vọng sẽ gặp bạn trong dịp khác!";
-    statusElement.className = agree ? "success-message" : "warning-message";
+    settingMessage(agree);
+    // Save result to localstorage
+    localStorage.setItem("result", agree);
   })
   .catch(error => {
     console.error("Error submitting form:", error);
@@ -74,4 +86,11 @@ function getRequiredQueryParamOrElse(param, defaultVal) {
     return urlValue;
   }
   else defaultVal;
+}
+
+function settingMessage(agree) {
+  submitElement.className = "hidden-button";
+
+  statusElement.innerHTML = agree ? "Cảm ơn bạn đã xác nhận sẽ tham dự!" : "Thật tiếc bạn không thể tham dự.<br/>Hy vọng sẽ gặp bạn trong dịp khác!";
+  statusElement.className = agree ? "success-message" : "warning-message";
 }
