@@ -91,12 +91,12 @@ function getCountDown(distance) {
   let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
   if (days > 0) {
-    return `Hôn lễ sẽ diễn ra sau <strong>${days + " ngày"}</strong> nữa.`;
+    return `Hôn lễ sẽ diễn ra sau <strong>${days + " ngày"}</strong> nữa!`;
   }
 
   if (hours > 0) {
-    return `Hôn lễ sẽ diễn ra sau <strong>${hours + " giờ"}</strong> nữa.`;
+    return `Hôn lễ sẽ diễn ra sau <strong>${hours + " giờ"}</strong> nữa!`;
   }
 
-  return `Hôn lễ sẽ diễn ra sau <strong>${minutes + " phút"}</strong> nữa.`;;
+  return `Hôn lễ sẽ diễn ra sau <strong>${minutes + " phút"}</strong> nữa!`;;
 }
