@@ -17,12 +17,14 @@ window.onload = function () {
   const agree = localStorage.getItem("result");
   if (agree) {
     settingMessage(agree);
+  } else {
+    submitElement.className = "display-button";
   }
 };
 
 function handelSubmit(agree) {
   // confirm action
-  if (!confirm(agree ? "Bạn có chắc chắn muốn tham dự?" : "Bạn có chắc chắn không thể tham dự?")) {
+  if (!confirm(agree ? "Bạn có chắc chắn có thể tham dự?" : "Bạn có chắc chắn không thể tham dự?")) {
     return;
   }
 
@@ -65,10 +67,9 @@ function getRequiredQueryParamOrElse(param, defaultVal) {
 }
 
 function settingMessage(agree) {
-  submitElement.className = "hidden-button";
-
-  statusElement.innerHTML = agree ? "Cảm ơn bạn đã xác nhận sẽ tham dự!" : "Thật tiếc bạn không thể tham dự.<br/>Hy vọng sẽ gặp bạn trong dịp khác!";
-  statusElement.className = agree ? "success-message" : "warning-message";
+  let agreed = Object.is(agree, true);
+  statusElement.innerHTML = agreed ? "Cảm ơn bạn đã xác nhận sẽ tham dự!" : "Thật tiếc bạn đã xác nhận không thể tham dự.<br/>Hy vọng sẽ gặp bạn trong dịp khác!";
+  statusElement.className = agreed ? "success-message" : "warning-message";
 }
 
 function countdown() {
