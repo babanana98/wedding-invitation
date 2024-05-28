@@ -37,9 +37,9 @@
           <br>Chúng tôi rất vui mừng được đón tiếp bạn!
         </p>
         <p id="fetchingStatus" class="hidden-message">Đang xử lý...</p>
-        <div id="submitButtons">
-          <button onclick="handelSubmit(false)">Tôi rất tiếc không thể tham dự</button>
-          <button onclick="handelSubmit(true)">Tôi sẽ tham dự</button>
+        <div id="submitButtons" class="display-button">
+          <button onclick="handelSubmit(true)" class="rsvp-button accept">Tôi sẽ tham dự</button>
+          <button onclick="handelSubmit(false)" class="rsvp-button decline">Tôi không thể tham dự</button>
         </div>
       </footer>
     </div>

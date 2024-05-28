@@ -57,7 +57,7 @@ function handelSubmit(agree) {
   })
   .then(response => {
     // Complete processing
-    statusElement.textContent = agree ? "Cảm ơn bạn đã xác nhận sẽ tham dự!" : "Thật tiếc bạn không thể tham dự. Hy vọng sẽ gặp bạn trong dịp khác!";
+    statusElement.innerHTML = agree ? "Cảm ơn bạn đã xác nhận sẽ tham dự!" : "Thật tiếc bạn không thể tham dự.<br/>Hy vọng sẽ gặp bạn trong dịp khác!";
     statusElement.className = agree ? "success-message" : "warning-message";
   })
   .catch(error => {
