@@ -2,10 +2,11 @@
 
 const GUEST_NAME_QUERY_PARAM = "guest";
 const GUEST_NAME_DEFAULT = "Quý khách";
-const TARGET_DATE = new Date("June 30, 2024 17:00:00");
+const TARGET_DATE = new Date("October 30, 2024 17:00:00");
 
 const statusElement = document.getElementById("fetchingStatus");
 const submitElement = document.getElementById("submitButtons");
+const countElement = document.getElementById("countdown");
 
 window.onload = function () {
   // setting countdown
@@ -74,11 +75,12 @@ function countdown() {
   var x = setInterval(function () {
     let distance = TARGET_DATE.getTime() - new Date().getTime();
 
-    document.getElementById("countdown").innerHTML = getCountDown(distance);
+    countElement.innerHTML = getCountDown(distance);
 
     if (distance < 0) {
       clearInterval(x);
-      document.getElementById("countdown").innerHTML = "The Wedding Has Started!";
+      countElement.innerHTML = `Hôn lễ đã được diễn ra!`;
+      submitElement.className = "hidden-button";
     }
   }, 1000);
 }
