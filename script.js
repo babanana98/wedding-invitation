@@ -1,13 +1,15 @@
 "use strict";
 
 const GUEST_NAME_QUERY_PARAM = "guest";
-const GUEST_NAME_DEFAULT = "guest";
+const GUEST_NAME_DEFAULT = "Quý khách";
+const TARGET_DATE = new Date("June 30, 2024 17:00:00");
 
 const statusElement = document.getElementById("fetchingStatus");
 const submitElement = document.getElementById("submitButtons");
 
 window.onload = function () {
-  // countdown("June 30, 2024 17:00:00");
+  // setting countdown
+  countdown();
   // setting guest name
   document.getElementById("guestName").innerHTML = getRequiredQueryParamOrElse(GUEST_NAME_QUERY_PARAM, GUEST_NAME_DEFAULT);
   // setting message
@@ -16,33 +18,6 @@ window.onload = function () {
     settingMessage(agree);
   }
 };
-
-// function countdown(target) {
-//   var weddingDate = new Date(target).getTime();
-
-//   var x = setInterval(function () {
-//     var now = new Date().getTime();
-//     var distance = weddingDate - now;
-
-//     var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-//     var hours = Math.floor(
-//       (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-//     );
-//     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-//     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-//     document.getElementById("days").innerText = days;
-//     document.getElementById("hours").innerText = hours;
-//     document.getElementById("minutes").innerText = minutes;
-//     document.getElementById("seconds").innerText = seconds;
-
-//     if (distance < 0) {
-//       clearInterval(x);
-//       document.getElementById("countdown").innerHTML =
-//         "The Wedding Has Started!";
-//     }
-//   }, 1000);
-// }
 
 function handelSubmit(agree) {
   // confirm action
@@ -85,7 +60,7 @@ function getRequiredQueryParamOrElse(param, defaultVal) {
   if (urlValue) {
     return urlValue;
   }
-  else defaultVal;
+  return defaultVal;
 }
 
 function settingMessage(agree) {
@@ -93,4 +68,33 @@ function settingMessage(agree) {
 
   statusElement.innerHTML = agree ? "Cảm ơn bạn đã xác nhận sẽ tham dự!" : "Thật tiếc bạn không thể tham dự.<br/>Hy vọng sẽ gặp bạn trong dịp khác!";
   statusElement.className = agree ? "success-message" : "warning-message";
+}
+
+function countdown() {
+  var x = setInterval(function () {
+    let distance = TARGET_DATE.getTime() - new Date().getTime();
+
+    document.getElementById("countdown").innerHTML = getCountDown(distance);
+
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("countdown").innerHTML = "The Wedding Has Started!";
+    }
+  }, 1000);
+}
+
+function getCountDown(distance) {
+  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+  if (days > 0) {
+    return `Hôn lễ sẽ diễn ra sau <strong>${days + " ngày"}</strong> nữa.`;
+  }
+
+  if (hours > 0) {
+    return `Hôn lễ sẽ diễn ra sau <strong>${hours + " giờ"}</strong> nữa.`;
+  }
+
+  return `Hôn lễ sẽ diễn ra sau <strong>${minutes + " phút"}</strong> nữa.`;;
 }
