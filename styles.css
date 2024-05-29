@@ -43,10 +43,8 @@ body {
   text-align: center;
 }
 
-header,
-.details,
 footer {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 h1 {
