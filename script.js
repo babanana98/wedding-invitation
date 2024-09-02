@@ -1,22 +1,24 @@
 "use strict";
 
 const GUEST_NAME_QUERY_PARAM = "guest";
-const GUEST_NAME_DEFAULT = "Quý khách";
+const GUEST_ROLE_QUERY_PARAM = "role";
 const TARGET_DATE = new Date("October 30, 2024 17:00:00");
 
 const statusElement = document.getElementById("fetchingStatus");
 const submitElement = document.getElementById("submitButtons");
-const countElement = document.getElementById("countdown");
+const guestNameElement = document.getElementById("guestName");
+const guestRoleElement = document.getElementById("guestRole");
 
 window.onload = function () {
-  // setting countdown
-  countdown();
   // setting guest name
-  document.getElementById("guestName").innerHTML = getRequiredQueryParamOrElse(GUEST_NAME_QUERY_PARAM, GUEST_NAME_DEFAULT);
+  guestNameElement.innerHTML = getRequiredQueryParamOrElse(GUEST_NAME_QUERY_PARAM, "Quý khách");
+  // setting guest role
+  const guestRole = getRequiredQueryParamOrElse(GUEST_ROLE_QUERY_PARAM, "SAME");
+  guestRoleElement.innerHTML = Role[guestRole];
   // setting message
   const agree = localStorage.getItem("result");
   if (agree) {
-    settingMessage(agree);
+    settingMessage(agree === "true");
   } else {
     submitElement.className = "display-button";
   }
@@ -24,7 +26,7 @@ window.onload = function () {
 
 function handelSubmit(agree) {
   // confirm action
-  if (!confirm(agree ? "Bạn có chắc chắn có thể tham dự?" : "Bạn có chắc chắn không thể tham dự?")) {
+  if (!confirm(agree ? "Bạn có chắc chắn CÓ thể tham dự?" : "Bạn có chắc chắn KHÔNG thể tham dự?")) {
     return;
   }
 
@@ -33,7 +35,7 @@ function handelSubmit(agree) {
   submitElement.className = "hidden-button";
 
   const formData = new FormData();
-  formData.append("entry.903587558", getRequiredQueryParamOrElse(GUEST_NAME_QUERY_PARAM, GUEST_NAME_DEFAULT));
+  formData.append("entry.903587558", guestNameElement.innerHTML);
   formData.append("entry.650573155", agree ? "Có, tôi sẽ tham dự." : "Không, tôi rất tiếc không thể tham dự.");
 
   fetch("https://docs.google.com/forms/u/0/d/e/1FAIpQLSf3dlqaAYSeGYLEoPtqhnxKrTJNe5DlSsIJ1QxmYIh0e0IZ1Q/formResponse", {
@@ -67,37 +69,15 @@ function getRequiredQueryParamOrElse(param, defaultVal) {
 }
 
 function settingMessage(agree) {
-  let agreed = Object.is(agree, true);
-  statusElement.innerHTML = agreed ? "Cảm ơn bạn đã xác nhận sẽ tham dự!" : "Thật tiếc bạn đã xác nhận không thể tham dự.<br/>Hy vọng sẽ gặp bạn trong dịp khác!";
-  statusElement.className = agreed ? "success-message" : "warning-message";
+  statusElement.innerHTML = agree ? "Cảm ơn bạn đã xác nhận sẽ tham dự!" : "Thật tiếc bạn đã xác nhận không thể tham dự.<br/>Hy vọng sẽ gặp bạn trong dịp khác!";
+  statusElement.className = agree ? "success-message" : "warning-message";
 }
 
-function countdown() {
-  var x = setInterval(function () {
-    let distance = TARGET_DATE.getTime() - new Date().getTime();
-
-    countElement.innerHTML = getCountDown(distance);
-
-    if (distance < 0) {
-      clearInterval(x);
-      countElement.innerHTML = `Hôn lễ đã được diễn ra!`;
-      submitElement.className = "hidden-button";
-    }
-  }, 1000);
-}
-
-function getCountDown(distance) {
-  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-  if (days > 0) {
-    return `Hôn lễ sẽ diễn ra sau <strong>${days + " ngày"}</strong> nữa!`;
-  }
-
-  if (hours > 0) {
-    return `Hôn lễ sẽ diễn ra sau <strong>${hours + " giờ"}</strong> nữa!`;
-  }
-
-  return `Hôn lễ sẽ diễn ra sau <strong>${minutes + " phút"}</strong> nữa!`;;
+const Role = {
+  SAME : "chúng tôi",
+  LOWER_M_X1 : "em",
+  UPPER_M_X1 : "anh chị",
+  LOWER_M_X2_1 : "cô chú",
+  LOWER_M_X2_2 : "bác",
+  UPPER_M_X2 : "cháu"
 }
