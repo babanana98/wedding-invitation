@@ -131,8 +131,8 @@ function getPx(val) {
 }
 
 function setPopupImageLimit() {
-    const popupImageUpperLimit = document.getElementById('popup-image-upper-limit');
-    const popupImageLowerLimit = document.getElementById('popup-image-lower-limit');
+    const popupImageUpperLimit = document.getElementById('popup-image-top-limit');
+    const popupImageLowerLimit = document.getElementById('popup-image-bottom-limit');
     popupImageUpperLimit.style.height = `${imgTopOrigin}px`;
     popupImageLowerLimit.style.height = `${imgTopOrigin}px`;
 
@@ -147,6 +147,6 @@ function setPopupImageLimit() {
 function resetImagePosition() {
     popupImage.style.removeProperty('left');
     popupImage.style.removeProperty('top');
-    popupImage.style.width = '100%';
+    popupImage.style.width = `${imgWidthOrigin}px`;
     scale = 1;
 }
