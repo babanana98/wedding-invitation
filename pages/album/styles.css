@@ -140,7 +140,7 @@ header {
 }
 
 /* Tablet styles */
-@media (min-width: 481px) {
+@media (min-width: 601px) {
   .gallery {
     flex-direction: row;
     padding: var(--img-gap) 0 var(--img-gap) var(--img-gap);
@@ -154,7 +154,7 @@ header {
 }
 
 /* PC styles */
-@media (min-width: 769px) {
+@media (min-width: 1201px) {
   .font-size__s1 {
     font-size: var(--font-s1-pc);
   }

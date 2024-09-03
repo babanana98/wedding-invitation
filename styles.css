@@ -239,7 +239,7 @@ svg.flakes {
 }
 
 /* Tablet styles */
-@media (min-width: 481px) {
+@media (min-width: 601px) {
   .container {
     padding: 15px;
     max-width: 600px;
@@ -247,7 +247,7 @@ svg.flakes {
 }
 
 /* PC styles */
-@media (min-width: 769px) {
+@media (min-width: 1201px) {
   .container {
     padding: 20px;
   }
