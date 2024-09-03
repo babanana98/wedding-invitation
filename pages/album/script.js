@@ -49,6 +49,53 @@ popupImage.addEventListener('wheel', function(event) {
     setImgPosition(imgRect.top, imgRect.left);
 });
 
+// Handle pinch-to-zoom
+let initialDistance = 0;
+popupImage.addEventListener('touchmove', function(event) {
+    if (event.touches.length === 2) {
+        event.preventDefault();
+        const currentDistance = getDistance(event.touches[0], event.touches[1]);
+
+        // Calculate scale based on the distance change
+        const distanceChange = currentDistance / initialDistance;
+        scale = Math.min(Math.max(1, scale * distanceChange), MAX_SCALE);
+
+        // Apply scale transform
+        popupImage.style.width = `${imgWidthOrigin * scale}px`;
+
+        // Calculating image boundary
+        setImageBoundaryMax(popupImage.getBoundingClientRect());
+
+        // Set img position with bounds
+        const imgRect = popupImage.getBoundingClientRect();
+        setImgPosition(imgRect.top, imgRect.left);
+
+        // Update initial distance for the next move event
+        initialDistance = currentDistance;
+    }
+});
+
+popupImage.addEventListener('touchstart', function(event) {
+    if (event.touches.length === 2) {
+        // Calculate initial distance between two fingers
+        initialDistance = getDistance(event.touches[0], event.touches[1]);
+    }
+});
+
+popupImage.addEventListener('touchend', function(event) {
+    if (event.touches.length < 2) {
+        initialDistance = 0;
+    }
+});
+
+// Helper function to calculate distance between two touch points
+function getDistance(touch1, touch2) {
+    return Math.sqrt(
+        Math.pow(touch2.clientX - touch1.clientX, 2) +
+        Math.pow(touch2.clientY - touch1.clientY, 2)
+    );
+}
+
 // Drag functionality
 let isDragging = false;
 let startX, startY, initialX, initialY;
