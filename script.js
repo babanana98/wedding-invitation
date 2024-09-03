@@ -2,7 +2,6 @@
 
 const GUEST_NAME_QUERY_PARAM = "guest";
 const GUEST_ROLE_QUERY_PARAM = "role";
-const TARGET_DATE = new Date("October 30, 2024 17:00:00");
 
 const statusElement = document.getElementById("fetchingStatus");
 const submitElement = document.getElementById("submitButtons");

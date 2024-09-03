@@ -139,13 +139,14 @@ body {
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 .rsvp-button.accept {
-  background-color: #33adff;
+  background-color: #8D311C;;
   color: white;
 }
 .rsvp-button.accept:hover {
-  background-color: #66c2ff;
+  background-color: #d5492a;
 }
 .rsvp-button.decline {
   background-color: #808080;
