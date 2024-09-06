@@ -73,6 +73,7 @@ header {
   flex-direction: column;
   gap: var(--img-gap);
   padding: var(--img-gap);
+  align-items: flex-start;
 }
 .gallery-image {
   width: 100%;
