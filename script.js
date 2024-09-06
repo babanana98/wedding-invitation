@@ -81,9 +81,9 @@ function settingMessage(agree) {
 
 const Role = {
   SAME : "chúng tôi",
-  LOWER_M_X1 : "em",
-  UPPER_M_X1 : "anh chị",
-  LOWER_M_X2_1 : "cô chú",
-  LOWER_M_X2_2 : "bác",
-  UPPER_M_X2 : "cháu"
+  LOWER_X1 : "anh chị",
+  UPPER_X1 : "em",
+  LOWER_X2 : "cháu",
+  UPPER_X2_1 : "cô chú",
+  UPPER_X2_2 : "bác"
 }
