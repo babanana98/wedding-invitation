@@ -2,12 +2,22 @@
 
 // Constant
 const MAX_SCALE = 3;
+const GUEST_NAME_QUERY_PARAM = "guest";
+const GUEST_ROLE_QUERY_PARAM = "role";
 
 // JavaScript for handling image popup, zoom, and drag
 const galleryImages = document.querySelectorAll('.gallery-image');
 const imagePopup = document.getElementById('image-popup');
 const popupImage = document.getElementById('popup-image');
 const closeButton = document.querySelector('.close');
+const invitationLinkElement = document.getElementById('invitationLink');
+
+window.onload = function () {
+    // setting album link
+    const guestName = getRequiredQueryParamOrElse(GUEST_NAME_QUERY_PARAM, "Quý khách");
+    const guestRole = getRequiredQueryParamOrElse(GUEST_ROLE_QUERY_PARAM, "SAME");
+    invitationLinkElement.href = "../../?" + "role=" + guestRole + "&guest=" + guestName;
+};
 
 // Open popup on image click
 galleryImages.forEach(image => {
@@ -196,4 +206,12 @@ function resetImagePosition() {
     popupImage.style.removeProperty('top');
     popupImage.style.width = `${imgWidthOrigin}px`;
     scale = 1;
+}
+
+function getRequiredQueryParamOrElse(param, defaultVal) {
+    const urlValue = new URLSearchParams(window.location.search).get(param);
+    if (urlValue) {
+      return urlValue;
+    }
+    return defaultVal;
 }

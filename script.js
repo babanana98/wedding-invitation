@@ -7,13 +7,17 @@ const statusElement = document.getElementById("fetchingStatus");
 const submitElement = document.getElementById("submitButtons");
 const guestNameElement = document.getElementById("guestName");
 const guestRoleElement = document.getElementById("guestRole");
+const albumLinkElement = document.getElementById("albumLink");
 
 window.onload = function () {
   // setting guest name
-  guestNameElement.innerHTML = getRequiredQueryParamOrElse(GUEST_NAME_QUERY_PARAM, "Quý khách");
+  const guestName = getRequiredQueryParamOrElse(GUEST_NAME_QUERY_PARAM, "Quý khách");
+  guestNameElement.innerHTML = guestName;
+
   // setting guest role
   const guestRole = getRequiredQueryParamOrElse(GUEST_ROLE_QUERY_PARAM, "SAME");
   guestRoleElement.innerHTML = Role[guestRole];
+
   // setting message
   const agree = localStorage.getItem("result");
   if (agree) {
@@ -21,6 +25,9 @@ window.onload = function () {
   } else {
     submitElement.className = "display-button";
   }
+
+  // setting album link
+  albumLinkElement.href = "pages/album/?" + "role=" + guestRole + "&guest=" + guestName;
 };
 
 function handelSubmit(agree) {
