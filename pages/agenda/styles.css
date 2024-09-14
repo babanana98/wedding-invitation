@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 :root {
   --font-s1-pc: 31.25px;
@@ -38,6 +40,7 @@
 body {
   margin: 0;
   font-family: var(--font-family__piazzolla), Arial, sans-serif;
+  color: #422A1C;
 }
 /* Header Styles */
 header {
@@ -62,6 +65,11 @@ header {
   color: #fff;
   border-radius: 6px 6px 0 0;
 }
+/* Agenda Styles */
+.agenda {
+  text-align: center;
+  padding: 0 20px;
+}
 /* Page title Styles */
 .page-title {
   text-align: center;
@@ -71,94 +79,87 @@ header {
   gap: 10px;
 }
 .page-title--font {
-  margin: 0;
   color: #8D311C;
 }
-/* Gallery Styles */
-.gallery {
+/* Timeline title Styles */
+.timeline {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
-  gap: var(--img-gap);
-  padding: var(--img-gap);
-  align-items: flex-start;
-}
-.gallery-image {
-  width: 100%;
-  height: auto;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: transform 0.2s ease;
-}
-/* Popup Styles */
-.image-popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--popup-background-color);
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
 }
-.popup-image-top-limit {
-  display: block;
+.time-item {
+  font-size: 1.2em;
+  background-color: #ffdab9;
+  padding: 10px;
+  margin: 20px 0;
+  border-radius: 8px;
+  width: 48%;
+  position: relative;
+  opacity: 0;
+  transform: translateX(-100%);
+  animation: slide-in-left 0.5s forwards;
+}
+.time-item.left {
+  align-self: flex-start;
+  transform: translateX(-100%);
+  text-align: right;
+  font-size: var(--font-s3-sp);
+  font-weight: 600;
+}
+.time-item.right {
+  align-self: flex-end;
+  transform: translateX(100%);
+  animation: slide-in-right 0.5s forwards;
+  text-align: left;
+  font-size: var(--font-s3-sp);
+  font-weight: 600;
+}
+.timeline::before {
   content: '';
-  width: 100vw;
-  background-color: var(--popup-background-color);
   position: absolute;
+  width: 4px;
+  background-color: #8D311C;
   top: 0;
-  left: 0;
-  z-index: 1002;
-}
-.popup-image-bottom-limit {
-  display: block;
-  content: '';
-  width: 100vw;
-  background-color: var(--popup-background-color);
-  position: absolute;
   bottom: 0;
-  left: 0;
-  z-index: 1002;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
 }
-.popup-image {
-  width: 100%;
-  height: auto;
-  cursor: grab;
-  position: absolute;
-  z-index: 1001;
+/* Timeline animation */
+@keyframes slide-in-left {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
-.close {
-  position: absolute;
-  top: 0;
-  right: 20px;
-  color: #8D311C;
-  font-size: 50px;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 1004;
+@keyframes slide-in-right {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
-/* Footer Styles */
-.footer {
-  text-align: center;
-  margin: 0;
-  padding: 0 20px 20px;
-  color: #8D311C;;
+.time-item.left:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.time-item.right:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.time-item.left:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.time-item.left:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.time-item.right:nth-child(5) {
+  animation-delay: 0.4s;
 }
 
 /* Tablet styles */
 @media (min-width: 601px) {
-  .gallery {
-    flex-direction: row;
-    padding: var(--img-gap) 0 var(--img-gap) var(--img-gap);
-  }
-  .gallery-image {
-    width: calc(50% - var(--img-gap));
-  }
-  .popup-image {
-    width: 100%;
+  .agenda {
+    text-align: center;
+    padding: 0 200px;
   }
 }
 
@@ -176,10 +177,20 @@ header {
   .font-size__body {
     font-size: var(--font-body-pc);
   }
-  .gallery-image {
-    width: calc(20% - var(--img-gap));
+  .time-item.left {
+    font-size: var(--font-s3-pc);
   }
-  .popup-image {
-    width: 60%;
+  .time-item.right {
+    font-size: var(--font-s3-pc);
+  }
+  .agenda {
+    text-align: center;
+    padding: 0 400px;
+  }
+  .time-item.left {
+    font-size: var(--font-s3-pc);
+  }
+  .time-item.right {
+    font-size: var(--font-s3-pc);
   }
 }
