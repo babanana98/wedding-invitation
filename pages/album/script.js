@@ -11,12 +11,14 @@ const imagePopup = document.getElementById('image-popup');
 const popupImage = document.getElementById('popup-image');
 const closeButton = document.querySelector('.close');
 const invitationLinkElement = document.getElementById('invitationLink');
+const agendaLinkElement = document.getElementById('agendaLink');
 
 window.onload = function () {
     // setting album link
     const guestName = getRequiredQueryParamOrElse(GUEST_NAME_QUERY_PARAM, "Quý khách");
     const guestRole = getRequiredQueryParamOrElse(GUEST_ROLE_QUERY_PARAM, "SAME");
-    invitationLinkElement.href = "../../?" + "role=" + guestRole + "&guest=" + guestName;
+    invitationLinkElement.href = invitationLinkElement.href + "?" + "role=" + guestRole + "&guest=" + guestName;
+    agendaLinkElement.href = agendaLinkElement.href + "?" + "role=" + guestRole + "&guest=" + guestName;
 };
 
 // Open popup on image click
